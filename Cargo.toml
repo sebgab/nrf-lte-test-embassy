@@ -24,13 +24,18 @@ embedded-storage = "0.3.1"
 cortex-m-rt = "0.7.3"
 
 
-embassy-nrf = { git="https://github.com/embassy-rs/embassy.git", features = ["defmt", "nrf9151-s", "time-driver-rtc1", "gpiote", "unstable-pac", "time"] }
+#embassy-nrf = { git="https://github.com/embassy-rs/embassy.git", features = ["defmt", "nrf9151-s", "time-driver-rtc1", "gpiote", "unstable-pac", "time"] }
+embassy-nrf = { path="/home/sebgab/git/embassy/embassy-nrf/", features = ["defmt", "nrf9151-s", "time-driver-rtc1", "gpiote", "unstable-pac", "time"] }
 cortex-m = { version = "0.7.6", features = ["critical-section-single-core"] }
 # Due to embassy-net-nrf91 not yet being published to crates.io we need to use git versions of repos
-embassy-executor = { git="https://github.com/embassy-rs/embassy.git", features = ["task-arena-size-32768", "arch-cortex-m", "executor-thread", "defmt", "executor-interrupt"] }
-embassy-time = { git="https://github.com/embassy-rs/embassy.git", features = ["defmt", "defmt-timestamp-uptime"] }
-embassy-net-nrf91 = { git="https://github.com/embassy-rs/embassy.git", features = ["defmt"]}
-embassy-net = { git="https://github.com/embassy-rs/embassy.git", features = ["defmt", "tcp", "proto-ipv4", "medium-ip", "dns"] }
+#embassy-executor = { git="https://github.com/embassy-rs/embassy.git", features = ["task-arena-size-32768", "arch-cortex-m", "executor-thread", "defmt", "executor-interrupt"] }
+embassy-executor = { path="/home/sebgab/git/embassy/embassy-executor/", features = ["task-arena-size-32768", "arch-cortex-m", "executor-thread", "defmt", "executor-interrupt"] }
+#embassy-time = { git="https://github.com/embassy-rs/embassy.git", features = ["defmt", "defmt-timestamp-uptime"] }
+embassy-time = { path="/home/sebgab/git/embassy/embassy-time/", features = ["defmt", "defmt-timestamp-uptime"] }
+#embassy-net-nrf91 = { git="https://github.com/embassy-rs/embassy.git", features = ["defmt"]}
+embassy-net-nrf91 = { path="/home/sebgab/git/embassy/embassy-net-nrf91/", features = ["defmt"]}
+# embassy-net = { git="https://github.com/embassy-rs/embassy.git", features = ["defmt", "tcp", "proto-ipv4", "medium-ip", "dns"] }
+embassy-net = { path="/home/sebgab/git/embassy/embassy-net/", features = ["defmt", "tcp", "proto-ipv4", "medium-ip", "dns"] }
 heapless = { version = "0.8.0", features = ["defmt-03", "serde"] }
 static_cell = "2.1.0"
 [profile.release]

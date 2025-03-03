@@ -204,23 +204,34 @@ async fn main(spawner: Spawner) {
         socket.set_timeout(Some(Duration::from_secs(10)));
 
         info!("Connecting...");
-        let host_addr = embassy_net::Ipv4Address::from_str("45.79.112.203").unwrap();
-        if let Err(e) = socket.connect((host_addr, 4242)).await {
+        //let host_addr = embassy_net::Ipv4Address::from_str("45.79.112.203").unwrap();
+        let host_addr = embassy_net::Ipv4Address::from_str("129.241.152.48").unwrap();
+        //if let Err(e) = socket.connect((host_addr, 4242)).await {
+        if let Err(e) = socket.connect((host_addr, 9000)).await {
             warn!("connect error: {:?}", e);
+            socket.close();
             Timer::after_secs(10).await;
             continue;
         }
         info!("Connected to {:?}", socket.remote_endpoint());
 
         let msg = b"Hello world!\n";
+        let mut read_buf: [u8; 256] = [0u8; 256];
         for _ in 0..10 {
             if let Err(e) = socket.write_all(msg).await {
                 warn!("write error: {:?}", e);
                 break;
             }
             info!("txd: {}", core::str::from_utf8(msg).unwrap());
+            if let Err(e) = socket.read(&mut read_buf).await {
+                warn!("Read error: {:?}", e);
+                break;
+            }
+            info!("rxd: {}", read_buf);
+            read_buf = [0u8; 256];
             Timer::after_secs(1).await;
         }
+        socket.close();
         Timer::after_secs(4).await;
     }
 }
