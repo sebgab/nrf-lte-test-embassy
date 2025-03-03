@@ -1,0 +1,9 @@
+[target.'cfg(all(target_arch = "arm", target_os = "none"))']
+# The nrf9151 protects the flash on write and this needs the erase all flag to allow re-programming
+# You might need to run it about three times...
+runner = "probe-rs run --chip nRF9160_xxAA --allow-erase-all"
+[build]
+target = "thumbv8m.main-none-eabihf"
+
+[env]
+DEFMT_LOG = "trace"

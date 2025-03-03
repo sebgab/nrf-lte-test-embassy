@@ -1,0 +1,22 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "preLaunchTask": "${defaultBuildTask}",
+        "type": "probe-rs-debug",
+        "request": "launch",
+        "name": "probe_rs Executable Test",
+        "flashingConfig": {
+          "flashingEnabled": true,
+        },
+        //!MODIFY
+        "chip": "nRF9160_xxAA",
+        "coreConfigs": [
+          {
+            //!MODIFY
+            "programBinary": "target/thumbv8m.main-none-eabihf/release/nrf-lte-test"
+          }
+        ]
+      }
+    ]
+  }
